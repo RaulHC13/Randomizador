@@ -3,10 +3,10 @@ package mainApp;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import resources.LocalizadorRecursos;
-
 
 public class Main extends Application {
 	
@@ -21,6 +21,8 @@ public class Main extends Application {
 			Scene scene = new Scene(root,600,400);
 			scene.getStylesheets().add(LocalizadorRecursos.class.getResource("css/application.css").toExternalForm());
 			primaryStage.setScene(scene);
+			primaryStage.setTitle("Randomizador");
+			primaryStage.getIcons().add(new Image(LocalizadorRecursos.class.getResourceAsStream("images/dice.png")));
 			primaryStage.show();
 			
 		} catch(Exception e) {

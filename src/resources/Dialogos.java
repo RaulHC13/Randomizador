@@ -2,6 +2,7 @@ package resources;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Modality;
@@ -21,6 +22,8 @@ public class Dialogos {
 		dialogo.setTitle(titulo);
 		dialogo.setHeaderText(null);
 		dialogo.setContentText(contenido);
+		Stage stage = (Stage) dialogo.getDialogPane().getScene().getWindow();
+		stage.getIcons().add(new Image(LocalizadorRecursos.class.getResourceAsStream("images/dice.png")));
 		if (propietario != null) {
 			dialogo.initModality(Modality.APPLICATION_MODAL);
 			dialogo.initOwner(propietario);
