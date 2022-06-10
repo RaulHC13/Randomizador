@@ -14,6 +14,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import resources.Dialogos;
 
 public class mainController {
 	
@@ -47,13 +48,20 @@ public class mainController {
 	
 	private ObservableList<String> getGanadores() {
 		
+		List<String> resultado = null;
+		
 		ArrayList<String> participantesLista = new ArrayList<>(getParticipantes());
 		
 		Collections.shuffle(participantesLista);
 		
-		List<String> resultado = participantesLista.subList(0, getNumParticipantes());
-		
-		obsGanadores = FXCollections.observableArrayList(resultado);
+		try {
+			
+			resultado = participantesLista.subList(0, getNumGanadores());
+			obsGanadores = FXCollections.observableArrayList(resultado);
+		} catch (Exception e) {
+			Dialogos.mostrarDialogoAdvertencia("ERROR", "No puede haber más ganadores que participantes.");
+			
+		}
 		
 		return obsGanadores;
 	}
@@ -63,18 +71,16 @@ public class mainController {
 		LVGanadores.setItems(getGanadores());
 	}
 	
-	private Integer getNumParticipantes() {
+	private Integer getNumGanadores() {
 		
 		int num = 0;
-		
 		try {
 			
-		 num = Integer.parseInt(TFNParticipantes.getText());
+		 num = Integer.parseInt(TFNParticipantes.getText().trim());
 		 
 		} catch (NumberFormatException e) {
-			e.printStackTrace();
+			Dialogos.mostrarDialogoAdvertencia("ERROR", "No se ha introducido un número válido");
 		}
-		
 		return num;
 	}
 }
